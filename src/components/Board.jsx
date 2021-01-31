@@ -18,7 +18,6 @@ const PuzzleContainer = styled.div`
 const PuzzleTable = styled.table`
   height: 100%
   width: 100%;
-
 `;
 
 const Tr = styled.tr`
@@ -33,7 +32,7 @@ const Td = styled.td`
 `;
 
 // {board, handleLeftClick, handleFlagClick}
-const Board = (props) => { //board, win, lose, minesLeft, time
+const Board = (props) => { //board, win, lose, minesLeft, currentTime, startTime, counter
 
   //console.log('board: ', board);
   return (
@@ -41,7 +40,7 @@ const Board = (props) => { //board, win, lose, minesLeft, time
       <PuzzleTable>
         <tbody>
           {
-            board.map((row) => {
+            props.board.map((row) => {
               return (
                 <Tr key={row}>
                   {

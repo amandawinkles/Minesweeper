@@ -145,18 +145,20 @@ class Minesweeper extends React.Component {
       win: false,
       lose: false,
       minesLeft: 0,
-      time: Date.now()
+      currentTime: Date.now(),
+      startTime: Date.now(),
+      counter: 0
     };
   }
 
   componentDidMount() {
-    if (!this.state.win && !this.state.lose) {
-      setInterval(() => {
+    setInterval(() => {
+      if (!this.state.win && !this.state.lose) {
         this.setState({
           time: Date.now()
         });
-      }, 1000)
-    }
+      }
+    }, 1000);
   }
 
   render() {
@@ -177,7 +179,7 @@ class Minesweeper extends React.Component {
               <TimeWindow>095</TimeWindow>
             </TimeWrapper>
           </HeaderContainer>
-          <Board board={this.state.board} win={this.state.win} lose={this.state.lose} minesLeft={this.state.minesLeft} time={this.state.time} />
+          <Board board={this.state.board} win={this.state.win} lose={this.state.lose} minesLeft={this.state.minesLeft} currentTime={this.state.currentTime} startTime={this.state.startTime} counter={this.state.counter} />
           <FooterContainer>
             <NewGameButton>
               <button type="submit" value="New Game">NEW GAME</button>
