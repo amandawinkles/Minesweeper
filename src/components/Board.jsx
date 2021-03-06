@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from "styled-components";
-//import Cell from './Cell.jsx';
+import Cell from './Cell.jsx';
 
 
-//5inx5in
 const PuzzleContainer = styled.div`
   border-width: 6px;
   border-style: inset;
@@ -31,22 +30,26 @@ const Td = styled.td`
   border-color: #ffffff #dadcdd #dadcdd #ffffff;
 `;
 
-// {board, handleLeftClick, handleFlagClick}
-const Board = (props) => { //board, win, lose, minesLeft, currentTime, startTime, counter
-
-  //console.log('board: ', board);
+const Board = (props) => { //board, win, lose, minesLeft, currentTime, startTime, counter, handleClick, handleFlag
   return (
     <PuzzleContainer>
       <PuzzleTable>
         <tbody>
           {
-            props.board.map((row) => {
+            props.board.map((row, rowIndex) => {
               return (
-                <Tr key={row}>
+                <Tr key={rowIndex}>
                   {
-                    row.map((cell, col) => {
+                    row.map((cell, colIndex) => {
                       return (
-                        <Cell key={col} />
+                        <Cell key={colIndex}
+                          handleClick={() => {
+                            this.props.handleClick(colIndex, rowIndex)
+                          }}
+                          handleFlag={() => {
+                            this.props.handleFlag(colIndex, rowIndex)
+                          }}
+                        />
                       );
                     })
                   }
@@ -55,36 +58,6 @@ const Board = (props) => { //board, win, lose, minesLeft, currentTime, startTime
               );
             })
           }
-          <Tr>
-            <Td className="closed"></Td>
-          </Tr>
-          <Tr>
-
-          </Tr>
-          <Tr>
-
-          </Tr>
-          <Tr>
-
-          </Tr>
-          <Tr>
-
-          </Tr>
-          <Tr>
-
-          </Tr>
-          <Tr>
-
-          </Tr>
-          <Tr>
-
-          </Tr>
-          <Tr>
-
-          </Tr>
-          <Tr>
-
-          </Tr>
         </tbody>
       </PuzzleTable>
     </PuzzleContainer>

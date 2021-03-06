@@ -1,7 +1,6 @@
 import React from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import Board from './Board.jsx';
-//import Cell from './components/Cell.js';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -148,7 +147,9 @@ class Minesweeper extends React.Component {
       currentTime: Date.now(),
       startTime: Date.now(),
       counter: 0
-    };
+    }
+    this.handleClick = this.handleClick.bind(this);
+    this.handleFlag = this.handleFlag.bind(this);
   }
 
   componentDidMount() {
@@ -159,6 +160,14 @@ class Minesweeper extends React.Component {
         });
       }
     }, 1000);
+  }
+
+  handleClick(x, y) {
+
+  }
+
+  handleFlag(x, y) {
+
   }
 
   render() {
@@ -179,7 +188,7 @@ class Minesweeper extends React.Component {
               <TimeWindow>095</TimeWindow>
             </TimeWrapper>
           </HeaderContainer>
-          <Board board={this.state.board} win={this.state.win} lose={this.state.lose} minesLeft={this.state.minesLeft} currentTime={this.state.currentTime} startTime={this.state.startTime} counter={this.state.counter} />
+          <Board board={this.state.board} win={this.state.win} lose={this.state.lose} minesLeft={this.state.minesLeft} currentTime={this.state.currentTime} startTime={this.state.startTime} counter={this.state.counter} handleClick={(x, y) => this.handleClick(x, y)} handleFlag={(x, y) => this.handleFlag(x, y)} />
           <FooterContainer>
             <NewGameButton>
               <button type="submit" value="New Game">NEW GAME</button>
