@@ -11,20 +11,13 @@ const Td = styled.td`
 
 const Cell = (props) => { //key
   return (
-    <Td>
-
+    <Td onClick={() => this.props.handleClick()}
+        onContextMenu={(e) => {
+          e.preventDefault();
+          this.props.handleFlag();
+        }} >
     </Td>
   );
 };
 
 export default Cell;
-
-/**
- *
-  handleCellClick: (x,y) => {
-    dispatch(sweep(x,y));
-  },
-  handleRightClick: (x,y) => {
-    dispatch(addFlag(x,y));
-  }
- */
