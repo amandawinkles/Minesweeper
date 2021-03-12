@@ -15,19 +15,16 @@ const PuzzleContainer = styled.div`
 `;
 
 const PuzzleTable = styled.table`
-  height: 100%
-  width: 100%;
+  height: 410px;
+  width: 460px;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
 `;
 
 const Tr = styled.tr`
   display: grid;
-`;
-
-const Td = styled.td`
-  padding: 0.5rem;
-  text-align: center;
-  border-style: outset;
-  border-color: #ffffff #dadcdd #dadcdd #ffffff;
 `;
 
 const Board = (props) => { //board, win, lose, minesLeft, currentTime, startTime, counter, handleClick, handleFlag
@@ -53,7 +50,6 @@ const Board = (props) => { //board, win, lose, minesLeft, currentTime, startTime
                       );
                     })
                   }
-                  <Td className="closed"></Td>
                 </Tr>
               );
             })

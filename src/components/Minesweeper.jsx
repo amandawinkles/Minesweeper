@@ -96,22 +96,6 @@ const TimeWindow = styled.span`
   padding: 0px 30px 0px 30px;
 `;
 
-//5inx5in
-// const BoardContainer = styled.div`
-//   border-width: 6px;
-//   border-style: inset;
-//   border-color: #dadcdd #ffffff #ffffff #dadcdd;
-//   background-color: #e6e6e6;
-//   height: 460px;
-//   width: 460px;
-//   padding: 0px 30px 0px 30px;
-//   display: flex;
-// `;
-
-// const Cell = styled.div`
-//   display: flex;
-// `;
-
 const FooterContainer = styled.div`
   height: 48px;
   width: 460px;
