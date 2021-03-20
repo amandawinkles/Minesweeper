@@ -40,12 +40,8 @@ const Board = (props) => { //board, win, lose, minesLeft, currentTime, startTime
                     row.map((cell, colIndex) => {
                       return (
                         <Cell key={colIndex}
-                          handleClick={() => {
-                            this.props.handleClick(colIndex, rowIndex)
-                          }}
-                          handleFlag={() => {
-                            this.props.handleFlag(colIndex, rowIndex)
-                          }}
+                          handleClick={() => {this.props.handleClick(colIndex, rowIndex)}}
+                          handleFlag={() => {this.props.handleFlag(colIndex, rowIndex)}}
                         />
                       );
                     })
