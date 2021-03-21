@@ -153,7 +153,6 @@ class Minesweeper extends React.Component {
     const board = Array(10).fill(0).map(() =>
       Array(10).fill(0)
     );
-    console.log('board 1: ', board);
     //place 10 bombs randomly on new board
     let bombs = 0;
     while (bombs < 10) {
@@ -168,10 +167,9 @@ class Minesweeper extends React.Component {
         bombs++;
       }
     }
-    console.log('board 2: ', board);
     //check number of bombs around each cell, increment cell value for each bomb
     for (let i = 0; i < board.length; i++) {
-      for (let j = 0; j < i.length; j++) {
+      for (let j = 0; j < board[i].length; j++) {
         let count = 0;
         if (board[i][j] !== 10) {
           if (i < 9 && j < 9 && board[i + 1][j + 1] === 10) {
@@ -203,7 +201,6 @@ class Minesweeper extends React.Component {
       }
     }
     console.log('board 3: ', board);
-    //make copy of state, update copy w/new values
     this.setState({
       board: board,
       minesLeft: bombs
