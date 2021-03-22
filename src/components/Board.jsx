@@ -11,20 +11,21 @@ const PuzzleContainer = styled.div`
   height: 460px;
   width: 460px;
   padding: 0px 30px 0px 30px;
-  display: grid;
 `;
 
 const PuzzleTable = styled.table`
-  height: 410px;
+  height: 422px;
   width: 460px;
   display: grid;
+  grid-template-rows: repeat(10, auto);
+  grid-template-columns: repeat(10, auto);
   justify-content: center;
   align-items: center;
   margin: auto;
 `;
 
 const Tr = styled.tr`
-  display: grid;
+  display: table-row;
 `;
 
 const Board = (props) => { //board, win, lose, minesLeft, currentTime, startTime, counter, handleClick, handleFlag
