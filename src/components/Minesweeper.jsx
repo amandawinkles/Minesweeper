@@ -21,7 +21,7 @@ const Container = styled.div`
   display: flex;
   box-sizing: border-box;
   height: 640px;
-  width: 580px;
+  width: 560px;
   border-style: outset;
   border-width: 8.5px;
   border-color: #ffffff #c5c7c8 #c5c7c8 #ffffff;

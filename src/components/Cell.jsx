@@ -3,10 +3,9 @@ import styled from "styled-components";
 
 
 const Td = styled.td`
-  height: 32px;
-  width: 32px;
+  height: 46px;
+  width: 46px;
   color: e6e6e6;
-  display: flex;
   padding: 0.5rem;
   text-align: center;
   border-style: outset;

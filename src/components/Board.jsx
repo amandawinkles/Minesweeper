@@ -14,18 +14,17 @@ const PuzzleContainer = styled.div`
 `;
 
 const PuzzleTable = styled.table`
-  height: 422px;
-  width: 460px;
+  height: 480px;
+  width: 480px;
   display: grid;
   grid-template-rows: repeat(10, auto);
   grid-template-columns: repeat(10, auto);
-  justify-content: center;
   align-items: center;
-  margin: auto;
 `;
 
 const Tr = styled.tr`
-  display: table-row;
+  display: flex;
+  align-items: center;
 `;
 
 const Board = (props) => { //board, win, lose, minesLeft, currentTime, startTime, counter, handleClick, handleFlag
