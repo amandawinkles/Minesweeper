@@ -1,7 +1,6 @@
 import React from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import Board from './Board.jsx';
-//import Cell from './components/Cell.js';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -22,7 +21,7 @@ const Container = styled.div`
   display: flex;
   box-sizing: border-box;
   height: 640px;
-  width: 580px;
+  width: 560px;
   border-style: outset;
   border-width: 8.5px;
   border-color: #ffffff #c5c7c8 #c5c7c8 #ffffff;
@@ -97,22 +96,6 @@ const TimeWindow = styled.span`
   padding: 0px 30px 0px 30px;
 `;
 
-//5inx5in
-// const BoardContainer = styled.div`
-//   border-width: 6px;
-//   border-style: inset;
-//   border-color: #dadcdd #ffffff #ffffff #dadcdd;
-//   background-color: #e6e6e6;
-//   height: 460px;
-//   width: 460px;
-//   padding: 0px 30px 0px 30px;
-//   display: flex;
-// `;
-
-// const Cell = styled.div`
-//   display: flex;
-// `;
-
 const FooterContainer = styled.div`
   height: 48px;
   width: 460px;
@@ -148,7 +131,10 @@ class Minesweeper extends React.Component {
       currentTime: Date.now(),
       startTime: Date.now(),
       counter: 0
-    };
+    }
+    this.handleClick = this.handleClick.bind(this);
+    this.handleFlag = this.handleFlag.bind(this);
+    this.handleNewGameClick = this.handleNewGameClick.bind(this);
   }
 
   componentDidMount() {
@@ -159,6 +145,74 @@ class Minesweeper extends React.Component {
         });
       }
     }, 1000);
+  }
+
+  handleNewGameClick(e) {
+    e.preventDefault();
+    //create board/matrix
+    const board = Array(10).fill(0).map(() =>
+      Array(10).fill(0)
+    );
+    //place 10 bombs randomly on new board
+    let bombs = 0;
+    while (bombs < 10) {
+      //select random row & column junction
+      const randRow = Math.floor(Math.random() * 10);
+      const randCol = Math.floor(Math.random() * 10);
+      console.log(board[randRow][randCol]);
+      //place bomb if space = 0
+      if (board[randRow][randCol] === 0) {
+        board[randRow][randCol] = 10;
+        //increase bombs count
+        bombs++;
+      }
+    }
+    //check number of bombs around each cell, increment cell value for each bomb
+    for (let i = 0; i < board.length; i++) {
+      for (let j = 0; j < board[i].length; j++) {
+        let count = 0;
+        if (board[i][j] !== 10) {
+          if (i < 9 && j < 9 && board[i + 1][j + 1] === 10) {
+            count++;
+          }
+          if (i < 9 && j > 0 && board[i + 1][j - 1] === 10) {
+            count++;
+          }
+          if (i < 9 && board[i + 1][j] === 10) {
+            count++;
+          }
+          if (j < 9 && board[i][j + 1] === 10) {
+            count++;
+          }
+          if (i > 0 && j > 0 && board[i - 1][j - 1] === 10) {
+            count++;
+          }
+          if (i > 0 && board[i - 1][j] === 10) {
+            count++;
+          }
+          if (i > 0 && j < 9 && board[i - 1][j + 1] === 10) {
+            count++;
+          }
+          if (j > 0 && board[i][j - 1] === 10) {
+            count++;
+          }
+          board[i][j] = count;
+        }
+      }
+    }
+    console.log('board 3: ', board);
+    this.setState({
+      board: board,
+      minesLeft: bombs
+    });
+  }
+
+  handleClick(x, y) {
+
+  }
+
+  handleFlag(x, y) {
+
   }
 
   render() {
@@ -179,10 +233,10 @@ class Minesweeper extends React.Component {
               <TimeWindow>095</TimeWindow>
             </TimeWrapper>
           </HeaderContainer>
-          <Board board={this.state.board} win={this.state.win} lose={this.state.lose} minesLeft={this.state.minesLeft} currentTime={this.state.currentTime} startTime={this.state.startTime} counter={this.state.counter} />
+          <Board board={this.state.board} win={this.state.win} lose={this.state.lose} minesLeft={this.state.minesLeft} currentTime={this.state.currentTime} startTime={this.state.startTime} counter={this.state.counter} handleClick={(x, y) => this.handleClick(x, y)} handleFlag={(x, y) => this.handleFlag(x, y)} />
           <FooterContainer>
             <NewGameButton>
-              <button type="submit" value="New Game">NEW GAME</button>
+              <button type="submit" value="New Game" onClick={this.handleNewGameClick}>NEW GAME</button>
             </NewGameButton>
           </FooterContainer>
         </Container>

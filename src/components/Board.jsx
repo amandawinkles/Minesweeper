@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from "styled-components";
-//import Cell from './Cell.jsx';
+import Cell from './Cell.jsx';
 
 
-//5inx5in
 const PuzzleContainer = styled.div`
   border-width: 6px;
   border-style: inset;
@@ -12,79 +11,45 @@ const PuzzleContainer = styled.div`
   height: 460px;
   width: 460px;
   padding: 0px 30px 0px 30px;
-  display: grid;
 `;
 
 const PuzzleTable = styled.table`
-  height: 100%
-  width: 100%;
+  height: 480px;
+  width: 480px;
+  display: grid;
+  grid-template-rows: repeat(10, auto);
+  grid-template-columns: repeat(10, auto);
+  align-items: center;
 `;
 
 const Tr = styled.tr`
-  display: grid;
+  display: flex;
+  align-items: center;
 `;
 
-const Td = styled.td`
-  padding: 0.5rem;
-  text-align: center;
-  border-style: outset;
-  border-color: #ffffff #dadcdd #dadcdd #ffffff;
-`;
-
-// {board, handleLeftClick, handleFlagClick}
-const Board = (props) => { //board, win, lose, minesLeft, currentTime, startTime, counter
-
-  //console.log('board: ', board);
+const Board = (props) => { //board, win, lose, minesLeft, currentTime, startTime, counter, handleClick, handleFlag
   return (
     <PuzzleContainer>
       <PuzzleTable>
         <tbody>
           {
-            props.board.map((row) => {
+            props.board.map((row, rowIndex) => {
               return (
-                <Tr key={row}>
+                <Tr key={rowIndex}>
                   {
-                    row.map((cell, col) => {
+                    row.map((cell, colIndex) => {
                       return (
-                        <Cell key={col} />
+                        <Cell key={colIndex}
+                          handleClick={() => {this.props.handleClick(colIndex, rowIndex)}}
+                          handleFlag={() => {this.props.handleFlag(colIndex, rowIndex)}}
+                        />
                       );
                     })
                   }
-                  <Td className="closed"></Td>
                 </Tr>
               );
             })
           }
-          <Tr>
-            <Td className="closed"></Td>
-          </Tr>
-          <Tr>
-
-          </Tr>
-          <Tr>
-
-          </Tr>
-          <Tr>
-
-          </Tr>
-          <Tr>
-
-          </Tr>
-          <Tr>
-
-          </Tr>
-          <Tr>
-
-          </Tr>
-          <Tr>
-
-          </Tr>
-          <Tr>
-
-          </Tr>
-          <Tr>
-
-          </Tr>
         </tbody>
       </PuzzleTable>
     </PuzzleContainer>
