@@ -125,6 +125,7 @@ class Minesweeper extends React.Component {
     super(props);
     this.state = {
       board: [],
+      cell: closed,
       win: false,
       lose: false,
       minesLeft: 0,
@@ -209,6 +210,9 @@ class Minesweeper extends React.Component {
 
   handleClick(x, y) {
 
+    this.setState({
+      cell: open
+    });
   }
 
   handleFlag(x, y) {

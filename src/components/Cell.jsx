@@ -17,10 +17,10 @@ const Td = styled.td`
 
 const Cell = (props) => { //key, handleClick, handleFlag
   return (
-    <Td onClick={() => this.props.handleClick()}
+    <Td onClick={() => props.handleClick()}
         onContextMenu={(e) => {
           e.preventDefault();
-          this.props.handleFlag();
+          props.handleFlag();
         }} >
     </Td>
   );
