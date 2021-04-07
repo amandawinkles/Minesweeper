@@ -125,7 +125,7 @@ class Minesweeper extends React.Component {
     super(props);
     this.state = {
       board: [],
-      cell: closed,
+      cellClicked: false,
       win: false,
       lose: false,
       minesLeft: 0,
@@ -209,10 +209,13 @@ class Minesweeper extends React.Component {
   }
 
   handleClick(x, y) {
-
     this.setState({
-      cell: open
-    });
+      cellClicked: !this.state.cellClicked
+    }, console.log(this.state.board[x][y]));
+    //check cellClicked state
+    //check if mine
+    //reveal
+    //this.state.board[x][y]
   }
 
   handleFlag(x, y) {
