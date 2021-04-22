@@ -118,6 +118,7 @@ const NewGameButton = styled.div`
   border-color: #ffffff #dadcdd #dadcdd #ffffff;
   justify-content: center;
   text-align: center;
+  outline: none;
 `;
 
 class Minesweeper extends React.Component {
@@ -126,6 +127,7 @@ class Minesweeper extends React.Component {
     this.state = {
       board: [],
       cellClicked: false,
+      cellValue: null,
       win: false,
       lose: false,
       minesLeft: 0,
@@ -210,12 +212,9 @@ class Minesweeper extends React.Component {
 
   handleClick(x, y) {
     this.setState({
-      cellClicked: !this.state.cellClicked
+      cellClicked: !this.state.cellClicked,
+      cellValue: this.state.board[x][y]
     }, console.log(this.state.board[x][y]));
-    //check cellClicked state
-    //check if mine
-    //reveal
-    //this.state.board[x][y]
   }
 
   handleFlag(x, y) {
@@ -233,14 +232,14 @@ class Minesweeper extends React.Component {
           <HeaderContainer>
             <MinesWrapper>
               <HeaderText>mines:</HeaderText>
-              <MinesWindow>2</MinesWindow>
+              <MinesWindow>{this.state.minesLeft}</MinesWindow>
             </MinesWrapper>
             <TimeWrapper>
               <HeaderText>time:</HeaderText>
-              <TimeWindow>095</TimeWindow>
+              <TimeWindow>{this.state.currentTime}</TimeWindow>
             </TimeWrapper>
           </HeaderContainer>
-          <Board board={this.state.board} win={this.state.win} lose={this.state.lose} minesLeft={this.state.minesLeft} currentTime={this.state.currentTime} startTime={this.state.startTime} counter={this.state.counter} handleClick={(x, y) => this.handleClick(x, y)} handleFlag={(x, y) => this.handleFlag(x, y)} />
+          <Board board={this.state.board} win={this.state.win} lose={this.state.lose} minesLeft={this.state.minesLeft} currentTime={this.state.currentTime} startTime={this.state.startTime} counter={this.state.counter} cellClicked={this.state.cellClicked} cellValue={this.state.cellValue} handleClick={(x, y) => this.handleClick(x, y)} handleFlag={(x, y) => this.handleFlag(x, y)} />
           <FooterContainer>
             <NewGameButton>
               <button type="submit" value="New Game" onClick={this.handleNewGameClick}>NEW GAME</button>
