@@ -1,6 +1,11 @@
 import React from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import Board from './Board.jsx';
+import mine from '../../assets/bomb.png';
+import one from '../../assets/one.png';
+import two from '../../assets/two.png';
+import three from '../../assets/three.png';
+import four from '../../assets/four.png';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -121,6 +126,18 @@ const NewGameButton = styled.div`
   outline: none;
 `;
 
+const OpenTd = styled.td`
+  height: 46px;
+  width: 46px;
+  color: e6e6e6;
+  padding: 0.5rem;
+  text-align: center;
+  border-style: none;
+  font-weight: bold;
+  font-size: 1.2em;
+  box-sizing: border-box;
+`;
+
 class Minesweeper extends React.Component {
   constructor(props) {
     super(props);
@@ -136,6 +153,7 @@ class Minesweeper extends React.Component {
       counter: 0
     }
     this.handleClick = this.handleClick.bind(this);
+    this.revealCell = this.revealCell.bind(this);
     this.handleFlag = this.handleFlag.bind(this);
     this.handleNewGameClick = this.handleNewGameClick.bind(this);
   }
@@ -215,6 +233,85 @@ class Minesweeper extends React.Component {
       cellClicked: !this.state.cellClicked,
       cellValue: this.state.board[x][y]
     }, console.log(this.state.board[x][y]));
+    this.revealCell(x, y);
+  }
+
+  revealCell(x, y) {
+    const { cellClicked, cellValue, handleClick, handleFlag } = this.state;
+    if (cellClicked) {
+      if (cellValue === 10) {
+        return (
+          <OpenTd>
+            <Cell handleClick={this.handleClick.bind(this)} handleFlag={this.handleFlag.bind(this)} />
+            {
+              <img alt="mine" src={mine} height="15" />
+            }
+          </OpenTd>
+        );
+      } else if (cellValue === 0) {
+        return (
+          <OpenTd
+          onClick={() => handleClick()}
+          onContextMenu={(e) => {
+            e.preventDefault();
+            handleFlag();
+          }} >
+          </OpenTd>
+        );
+      } else if (cellValue === 1) {
+        return (
+          <OpenTd
+          onClick={() => handleClick()}
+          onContextMenu={(e) => {
+            e.preventDefault();
+            handleFlag();
+          }} >
+            {
+              <img alt="1" src={one} height="15" />
+            }
+          </OpenTd>
+        );
+      } else if (cellValue === 2) {
+        return (
+          <OpenTd
+          onClick={() => handleClick()}
+          onContextMenu={(e) => {
+            e.preventDefault();
+            handleFlag();
+          }} >
+            {
+              <img alt="2" src={two} height="15" />
+            }
+          </OpenTd>
+        );
+      } else if (cellValue === 3) {
+        return (
+          <OpenTd
+          onClick={() => handleClick()}
+          onContextMenu={(e) => {
+            e.preventDefault();
+            handleFlag();
+          }} >
+            {
+              <img alt="3" src={three} height="15" />
+            }
+          </OpenTd>
+        );
+      } else if (cellValue === 4) {
+        return (
+          <OpenTd
+          onClick={() => handleClick()}
+          onContextMenu={(e) => {
+            e.preventDefault();
+            handleFlag();
+          }} >
+            {
+              <img alt="4" src={four} height="15" />
+            }
+          </OpenTd>
+        );
+      }
+    }
   }
 
   handleFlag(x, y) {
@@ -252,3 +349,11 @@ class Minesweeper extends React.Component {
 };
 
 export default Minesweeper;
+
+{/* <OpenTd
+          onClick={() => handleClick()}
+          onContextMenu={(e) => {
+            e.preventDefault();
+            handleFlag();
+          }} >
+          </OpenTd> */}
