@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import Board from './Board.jsx';
+import Cell from './Cell.jsx';
 import mine from '../../assets/bomb.png';
 import one from '../../assets/one.png';
 import two from '../../assets/two.png';
@@ -233,11 +234,20 @@ class Minesweeper extends React.Component {
       cellClicked: !this.state.cellClicked,
       cellValue: this.state.board[x][y]
     }, console.log(this.state.board[x][y]));
-    this.revealCell(x, y);
   }
 
-  revealCell(x, y) {
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.cellValue !== this.state.cellValue) {
+      this.setState({
+        cellValue: this.state.cellValue
+      });
+      this.revealCell();
+    }
+  }
+
+  revealCell() {
     const { cellClicked, cellValue, handleClick, handleFlag } = this.state;
+    //these returns aren't actually returning, because in the wrong place - need to connect to render()
     if (cellClicked) {
       if (cellValue === 10) {
         return (
@@ -350,10 +360,4 @@ class Minesweeper extends React.Component {
 
 export default Minesweeper;
 
-{/* <OpenTd
-          onClick={() => handleClick()}
-          onContextMenu={(e) => {
-            e.preventDefault();
-            handleFlag();
-          }} >
-          </OpenTd> */}
+//onClick={(x, y) => this.revealCell(x, y)}

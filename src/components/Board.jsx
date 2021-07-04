@@ -28,8 +28,8 @@ const Tr = styled.tr`
   align-items: center;
 `;
 
-const Board = (props) => { //board, win, lose, minesLeft, currentTime, startTime, counter, cellClicked, cellValue, handleClick, handleFlag
-  const { board, win, lose, minesLeft, currentTime, startTime, counter, cellClicked, cellValue, handleClick, handleFlag } = props;
+const Board = (props) => {
+  const { board, handleClick, handleFlag } = props;
   return (
     <PuzzleContainer>
       <PuzzleTable>
@@ -63,3 +63,11 @@ const Board = (props) => { //board, win, lose, minesLeft, currentTime, startTime
 };
 
 export default Board;
+
+
+//board, onClick, win, lose, minesLeft, currentTime, startTime, counter, cellClicked, cellValue, handleClick, handleFlag
+
+/* onClick={() => {
+  onClick(colIndex, rowIndex)
+}}
+*/
